@@ -45,7 +45,7 @@
                         <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span></a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Graphs</span><span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Packet Analysis</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li><a href="graph_flot.html">Flot Charts</a></li>
                             <li><a href="graph_morris.html">Morris.js Charts</a></li>
@@ -57,7 +57,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">Rule Set </span></a>
+                        <a href="mailbox.html"><i class="fa fa-edit"></i> <span class="nav-label">Rule Set</span></a>
                         <ul class="nav nav-second-level collapse">
                             <li><a href="mailbox.html">Inbox</a></li>
                             <li><a href="mail_detail.html">Email view</a></li>
@@ -66,13 +66,13 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="metrics.html"><i class="fa fa-pie-chart"></i> <span class="nav-label">User control</span>  </a>
+                        <a href="metrics.html"><i class="fa fa-sitemap"></i> <span class="nav-label">User control</span>  </a>
                     </li>
                     <li>
-                        <a href="widgets.html"><i class="fa fa-flask"></i> <span class="nav-label">GeoIP</span></a>
+                        <a href="widgets.html"><i class="fa fa-globe"></i> <span class="nav-label">GeoIP</span></a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-globe"></i> <span class="nav-label">Log Report</span></a>
+                        <a href="#"><i class="fa fa-database"></i> <span class="nav-label">Log Report</span></a>
                         <ul class="nav nav-second-level collapse">
                             <li><a href="toastr_notifications.html">Notification</a></li>
                             <li><a href="nestable_list.html">Nestable list</a></li>
