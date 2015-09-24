@@ -13,7 +13,10 @@
 
     <link href="/assets/lib/css/animate.css" rel="stylesheet">
     <link href="/assets/lib/css/style.css" rel="stylesheet">
-
+    
+    <link href="/assets/css/common.css" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body class="gray-bg">
@@ -21,19 +24,18 @@
     <div class="middle-box text-center loginscreen animated fadeInDown">
         <div>
             <div>
-
-                <h1 class="logo-name"><img src="/assets/img/logo.png"></h1>
+                <i class="material-icons logo-icon">security</i>
+                <h2 class="logo-name">NetPro-KLP</h2>
 
             </div>
-            <form class="m-t" role="form" action="index.html">
+            <form class="m-t" role="form" method="post" action="/">
                 <div class="form-group">
-                    <input type="email" class="form-control" placeholder="Username" required="">
+                    <input type="text" name="id" class="form-control" placeholder="아이디" required="">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Password" required="">
+                    <input type="password" name="pw" class="form-control" placeholder="비밀번호" required="">
                 </div>
-                <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
-
+                <button type="submit" class="btn btn-primary block full-width m-b">로그인</button>
             </form>
         </div>
     </div>
@@ -41,7 +43,6 @@
     <!-- Mainly scripts -->
     <script src="/assets/lib/js/jquery-2.1.4.min.js"></script>
     <script src="/assets/lib/js/bootstrap.min.js"></script>
-
 </body>
 
 </html>

@@ -1,8 +1,0 @@
-<script src="./socket.io-0.9.10.js"></script>
-<script>
-  var socket = io.connect('http://172.16.101.163:8888');
-    socket.on('msg', function (data) {
-        console.log(data);
-        socket.emit('my other event', { msg: 'data' });
-    });
-</script>

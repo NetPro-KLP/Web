@@ -1,11 +1,14 @@
-#NetPro-KLP Web#
+NetPro-KLP Web
+===
 
-##Used##
---------
+##Requirement
+---
+```
 * NGINX
 * PHP
 * PhpMyAdmin
+```
 
-##Introduction
---------------
+##Introduction##
+---
 This is control panel for firewall system
