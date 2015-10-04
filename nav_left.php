@@ -17,7 +17,7 @@
                 KLP-Firewall
             </div>
           </li>
-          <li class="active">
+          <li>
               <a href="/"><i class="fa fa-th-large"></i> <span class="nav-label">대쉬보드</span></a>
           </li>
           <li>
