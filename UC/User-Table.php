@@ -36,11 +36,13 @@
                             <td class="center">2015-06-15 12:00:00</td>
                             <td class="center">2015-06-15 12:00:00</td>
                             <td class="center"><span class="label label-success">정상</span></td>
-                            <td class="center"><div class="btn-group">
-                                    <button class="btn-white btn btn-xs">패킷보기</button>
-                                    <button class="btn-white btn btn-xs">차단하기</button>
-                                    <button class="btn-white btn btn-xs">지우기</button>
-                                </div></td>
+                            <td>
+	                            <div class="btn-group">
+                                <button class="btn-white btn btn-xs">패킷보기</button>
+                                <button class="btn-white btn btn-xs">차단하기</button>
+                                <button class="btn-white btn btn-xs">지우기</button>
+                              </div>
+                            </td>
                         </tr>
                         <tr>
                             <td>1</td>
