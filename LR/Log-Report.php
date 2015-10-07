@@ -11,34 +11,22 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
 											<h5> 로그 리포트</h5>
-                    <div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-wrench"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#">Config option 1</a>
-                            </li>
-                            <li><a href="#">Config option 2</a>
-                            </li>
-                        </ul>
-                        <a class="close-link">
-                            <i class="fa fa-times"></i>
-                        </a>
-                    </div>
                 </div>
                 <div class="ibox-content">
                     <input type="text" class="form-control input-sm m-b-xs" id="filter"
-                           placeholder="Search in table">
+                           placeholder="찾기">
 
                     <table class="footable table table-stripped" data-page-size="8" data-filter=#filter>
                         <thead>
                         <tr>
                             <th>idx</th>
+                            <th>출발지 IP</th>
+														<th>출발지 Port</th>
+														<th>도착지 IP</th>
+														<th>도착지 Port</th>
+														<th>프로토컬</th>
                             <th>탐지명</th>
-                            <th>탐지 패킷</th>
+                            <th>탐지 페이로드</th>
                             <th>위험도</th>
                             <th>날짜</th>
                         </tr>
@@ -46,6 +34,11 @@
                         <tbody>
                         <tr>
                             <td>1</td>
+                            <td>127.0.0.1</td>
+                            <td>8080</td>
+                            <td>127.0.0.1</td>
+                            <td>80</td>
+                            <td>HTTP</td>
                             <td>Ping Pong Virus</td>
                             <td>13|12|12|smtp</td>
                             <td class="center"><span class="label label-danger">위험</span></td>
@@ -53,80 +46,84 @@
                         </tr>
                         <tr>
                             <td>1</td>
-                            <td>Ping Pong Virus
-                            </td>
+                            <td>127.0.0.1</td>
+                            <td>8080</td>
+                            <td>127.0.0.1</td>
+                            <td>80</td>
+                            <td>HTTP</td>
+                            <td>Ping Pong Virus</td>
                             <td>13|12|12|smtp</td>
                             <td class="center"><span class="label label-warning">보통</span></td>
                             <td class="center">2015-06-15 12:00:00</td>
                         </tr>
                         <tr>
                             <td>1</td>
-                            <td>Ping Pong Virus
-                            </td>
+                            <td>127.0.0.1</td>
+                            <td>8080</td>
+                            <td>127.0.0.1</td>
+                            <td>80</td>
+                            <td>HTTP</td>
+                            <td>Ping Pong Virus</td>
                             <td>13|12|12|smtp</td>
                             <td class="center"><span class="label label-danger">위험</span></td>
                             <td class="center">2015-06-15 12:00:00</td>
                         </tr>
                         <tr>
                             <td>1</td>
-                            <td>Ping Pong Virus
-                            </td>
+                            <td>127.0.0.1</td>
+                            <td>8080</td>
+                            <td>127.0.0.1</td>
+                            <td>80</td>
+                            <td>HTTP</td>
+                            <td>Ping Pong Virus</td>
                             <td>13|12|12|smtp</td>
                             <td class="center"><span class="label label-danger">위험</span></td>
                             <td class="center">2015-06-15 12:00:00</td>
                         </tr>
                         <tr>
                             <td>1</td>
-                            <td>Ping Pong Virus
-                            </td>
+                            <td>127.0.0.1</td>
+                            <td>8080</td>
+                            <td>127.0.0.1</td>
+                            <td>80</td>
+                            <td>HTTP</td>
+                            <td>Ping Pong Virus</td>
                             <td>13|12|12|smtp</td>
                             <td class="center"><span class="label label-danger">위험</span></td>
                             <td class="center">2015-06-15 12:00:00</td>
                         </tr>
                         <tr>
                             <td>1</td>
-                            <td>Ping Pong Virus
-                            </td>
+                            <td>127.0.0.1</td>
+                            <td>8080</td>
+                            <td>127.0.0.1</td>
+                            <td>80</td>
+                            <td>HTTP</td>
+                            <td>Ping Pong Virus</td>
                             <td>13|12|12|smtp</td>
                             <td class="center"><span class="label label-danger">위험</span></td>
                             <td class="center">2015-06-15 12:00:00</td>
                         </tr>
                         <tr>
                             <td>1</td>
-                            <td>Ping Pong Virus
-                            </td>
+                            <td>127.0.0.1</td>
+                            <td>8080</td>
+                            <td>127.0.0.1</td>
+                            <td>80</td>
+                            <td>HTTP</td>
+                            <td>Ping Pong Virus</td>
                             <td>13|12|12|smtp</td>
                             <td class="center"><span class="label label-danger">위험</span></td>
                             <td class="center">2015-06-15 12:00:00</td>
                         </tr>
                         <tr>
                             <td>1</td>
-                            <td>Ping Pong Virus
-                            </td>
-                            <td>13|12|12|smtp</td>
-                            <td class="center"><span class="label label-danger">위험</span></td>
-                            <td class="center">2015-06-15 12:00:00</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Ping Pong Virus
-                            </td>
-                            <td>13|12|12|smtp</td>
-                            <td class="center"><span class="label label-danger">위험</span></td>
-                            <td class="center">2015-06-15 12:00:00</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Ping Pong Virus
-                            </td>
-                            <td>13|12|12|smtp</td>
-                            <td class="center"><span class="label label-danger">위험</span></td>
-                            <td class="center">2015-06-15 12:00:00</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Ping Pong Virus
-                            </td>
+                            <td>127.0.0.1</td>
+                            <td>8080</td>
+                            <td>127.0.0.1</td>
+                            <td>80</td>
+                            <td>HTTP</td>
+                            <td>Ping Pong Virus</td>
                             <td>13|12|12|smtp</td>
                             <td class="center"><span class="label label-danger">위험</span></td>
                             <td class="center">2015-06-15 12:00:00</td>
@@ -134,7 +131,7 @@
                         </tbody>
                         <tfoot>
                         <tr>
-                            <td colspan="5">
+                            <td colspan="10">
                                 <ul class="pagination pull-right"></ul>
                             </td>
                         </tr>
