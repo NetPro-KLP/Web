@@ -5,7 +5,7 @@
     </div>
     <ul class="nav navbar-top-links navbar-right">
       <li>
-        <a href="logout.php">
+        <a href="/logout.php">
             <i class="fa fa-sign-out"></i> 로그아웃
         </a>
       </li>

@@ -1,30 +1,30 @@
 <nav class="navbar-default navbar-static-side" role="navigation">
       <div class="sidebar-collapse">
         <ul class="nav metismenu" id="side-menu">
-          <li class="nav-header">
-            <div class="dropdown profile-element"> 
-              <span>
-                <img alt="image" class="img-circle" src="/assets/img/default.png" />
-              </span>
-              <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-              <span class="clear">
-                <span class="block m-t-xs">
-                  <strong class="font-bold"><?=$result["name"]?></strong>
-                </span> 
-              <span class="text-muted text-xs block"><?=$result["position"]?></span> </span> </a>
-            </div>
-            <div class="logo-element">
-                KLP-Firewall
-            </div>
-          </li>
+	          <li class="nav-header">
+	            <div class="dropdown profile-element"> 
+	              <span>
+	                <a href="/profile"><img alt="image" class="img-circle" src="/assets/img/default.png" /></a>
+	              </span>
+	              <a data-toggle="dropdown" class="dropdown-toggle" href="/profile">
+	              <span class="clear">
+	                <span class="block m-t-xs">
+	                  <strong class="font-bold"><?=$result["name"]?></strong>
+	                </span> 
+	              <span class="text-muted text-xs block"><?=$result["position"]?></span> </span> </a>
+	            </div>
+	            <div class="logo-element">
+	                KLP-Firewall
+	            </div>
+	          </li>
           <li>
               <a href="/"><i class="fa fa-th-large"></i> <span class="nav-label">대쉬보드</span></a>
           </li>
           <li>
             <a href="/UC"><i class="fa fa-sitemap"></i> <span class="nav-label">유저 관리</span><span class="fa arrow"></span></a>
               <ul class="nav nav-second-level collapse">
-                <li><a href="/UC/Control-Panel">실시간 관제</a></li>
                 <li><a href="/UC/User-Table">유저 테이블</a></li>
+                <li><a href="/UC/Control-Panel">실시간 관제</a></li>
             	</ul>
           </li>
           <li>
