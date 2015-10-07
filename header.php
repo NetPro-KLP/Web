@@ -53,6 +53,8 @@
 
     <link href="/assets/lib/css/animate.css" rel="stylesheet">
     <link href="/assets/lib/css/style.css" rel="stylesheet">
+    
+    <link href="/assets/lib/css/plugins/jQueryUI/jquery-ui-1.10.4.custom.min.css" rel="stylesheet">
 
     <link href="/assets/css/common.css" rel="stylesheet">
     
