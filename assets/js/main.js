@@ -142,7 +142,7 @@ $(document).ready(function() {
         backgroundColor: "transparent",
         regionStyle: {
             initial: {
-                fill: '#e4e4e4',
+                fill: '#1ab394',
                 "fill-opacity": 0.9,
                 stroke: 'none',
                 "stroke-width": 0,
@@ -153,7 +153,7 @@ $(document).ready(function() {
         series: {
             regions: [{
                 values: mapData,
-                scale: ["#1ab394", "#22d6b1"],
+                scale: ["#ff0000"],
                 normalizeFunction: 'polynomial'
             }]
         },
