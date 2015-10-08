@@ -1,4 +1,4 @@
 <?php
-	header("Location: ./Packet-Table");
+	header("Location: ./Trafic-Stats");
 	die();
 ?>

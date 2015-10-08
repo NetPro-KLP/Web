@@ -1,4 +1,4 @@
 <?php
-	header("Location: ./User-Table");
+	header("Location: ./Control-Panel");
 	die();
 ?>
