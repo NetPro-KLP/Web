@@ -5,8 +5,8 @@
     <div id="page-wrapper" class="gray-bg">
       <?php include_once 'nav_top.php'; ?>
       <div class="wrapper wrapper-content">
-        <div class="row ui-sortable">
-          <div class="col-lg-3">
+        <div class="row">
+          <div class="col-lg-3 ui-sortable">
               <div class="ibox float-e-margins">
                   <div class="ibox-title">
                       <span class="label label-primary pull-right">정상</span>
@@ -14,7 +14,7 @@
                   </div>
                   <div class="ibox-content">
                       <h1 class="no-margins">40 886,200</h1>
-                      <small>/KB</small>
+                      <small>/MB</small>
                   </div>
               </div>
           </div>
@@ -26,7 +26,7 @@
                   </div>
                   <div class="ibox-content">
                       <h1 class="no-margins">275,800</h1>
-                      <small>/KB</small>
+                      <small>/MB</small>
                   </div>
               </div>
           </div>
@@ -45,7 +45,7 @@
           <div class="col-lg-3">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>총 유저</h5>
+                        <h5>내부 유저</h5>
                     </div>
                     <div class="ibox-content">
                         <h1 class="no-margins">150</h1>
@@ -54,8 +54,8 @@
                 </div>
             </div>
         </div>
-        <div class="row ui-sortable">
-          <div class="col-lg-12">
+        <div class="row">
+          <div class="col-lg-12 ui-sortable">
               <div class="ibox float-e-margins">
                   <div class="ibox-title">
                       <h5>트래픽 양</h5>
@@ -108,11 +108,11 @@
                   </div>
               </div>
           </div>
-          <div class="row ui-sortable">
+          <div class="row">
               <div class="col-lg-4">
                   <div class="ibox float-e-margins">
                       <div class="ibox-title">
-                          <h5>메세지</h5>
+                          <h5>차단 메세지</h5>
                           <div class="ibox-tools">
                               <a class="collapse-link">
                                   <i class="fa fa-chevron-up"></i>
@@ -481,13 +481,13 @@
 
     <!-- Socket.io -->
     <script src="/assets/lib/js/socket.io.js"></script>
-  <script>
-    var socket = io.connect('http://172.16.101.163:8888');
-    socket.on('news', function (data) {
-        console.log(data);
-        socket.emit('my other event', { my: 'fuckkkkkkkkkkk' });
-    });
-  </script>
+	  <script>
+	    var socket = io.connect('http://172.16.101.163:8888');
+	    socket.on('news', function (data) {
+	        console.log(data);
+	        socket.emit('my other event', { my: 'fuckkkkkkkkkkk' });
+	    });
+	  </script>
    <!-- Mainly scripts -->
     <script src="/assets/lib/js/jquery-2.1.4.min.js"></script>
     <script src="/assets/lib/js/bootstrap.min.js"></script>
