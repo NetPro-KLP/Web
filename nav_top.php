@@ -12,3 +12,9 @@
     </ul>
   </nav>
 </div>
+<div class="row wrapper border-bottom white-bg page-heading top-panel">
+  <div class="col-lg-10">
+      <h2 id="main-title" class="animated fadeIn"></h2>
+      <ol class="breadcrumb"></ol>
+  </div>
+</div>
