@@ -40,7 +40,7 @@ $(document).ready(function() {
 
     var dataset = [
         {
-            label: "Number of orders",
+            label: "TCP",
             data: data3,
             color: "#1ab394",
             bars: {
@@ -51,7 +51,7 @@ $(document).ready(function() {
             }
 
         }, {
-            label: "Payments",
+            label: "UDP",
             data: data2,
             yaxis: 2,
             color: "#1C84C6",
