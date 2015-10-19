@@ -23,7 +23,6 @@
                                         <th>출발지 IP:Port</th>
                                         <th>도착지 IP:Port</th>
                                         <th>프로토콜</th>
-                                        <th>타입</th>
                                         <th>패킷 수</th>
                                         <th>총 바이트</th>
                                         <th>시작 시간</th>
@@ -43,7 +42,6 @@
                                             echo '<td>' . $n . '</td>';
                                             echo '<td>' . $row["source_ip"] . ":" . $row["source_port"] . '</td>';
                                             echo '<td>' . $row["destination_ip"] . ":" . $row["destination_port"] . '</td>';
-                                            echo '<td>' . $row["protocol"] . '</td>';
                                             if($row["tcporudp"] == 0)
                                                 echo '<td>TCP</td>';
                                             else
