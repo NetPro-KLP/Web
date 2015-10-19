@@ -24,7 +24,6 @@
                                             <th>도착지 IP</th>
                                             <th>도착지 Port</th>
                                             <th>프로토컬</th>
-                                            <th>타입</th>
                                             <th>탐지명</th>
                                             <th data-hide="all">탐지 페이로드</th>
                                             <th>위험도</th>
@@ -33,7 +32,7 @@
                                     </thead>
                                     <tbody>
                                          <?
-                                            $result = $db->mysqli->query("SELECT packets.source_ip,packets.source_port,packets.destination_ip,packets.destination_port,packets.protocol,packets.tcpudp, packet_log.name,packet_log.hazard,packet_log.payload,packet_log.createdAt FROM `packet_log` INNER JOIN packets ON packet_log.packet_idx = packets.idx");
+                                            $result = $db->mysqli->query("SELECT packets.source_ip,packets.source_port,packets.destination_ip,packets.destination_port,packets.tcpudp, packet_log.name,packet_log.hazard,packet_log.payload,packet_log.createdAt FROM `packet_log` INNER JOIN packets ON packet_log.packet_idx = packets.idx");
                                             $n=0;
                                             while($row = $result->fetch_array(MYSQL_ASSOC))
                                             {
@@ -44,7 +43,6 @@
                                                 echo "<td>" . $row["source_port"] . "</td>";
                                                 echo "<td>" . $row["destination_ip"] . "</td>";
                                                 echo "<td>" . $row["destination_port"] . "</td>";
-                                                echo "<td>" . $row["protocol"] . "</td>";
                                                  if($row["tcpudp"] == 0)
                                                     echo "<td>" . 'TCP' . "</td>";
                                                 else
