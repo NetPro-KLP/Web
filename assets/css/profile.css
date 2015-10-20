@@ -1,5 +1,8 @@
 .circle-border{
-	width: 120px;
+	max-width: 120px;
+    max-height: 120px;
+	height: 120px;
 	border: 2px solid #ccc !important;
 	border-radius: 50% !important;
+	cursor: pointer;
 }
