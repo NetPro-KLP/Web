@@ -1,0 +1,39 @@
+.ibox-title > .ip{
+    margin: 0;
+}
+.ibox-title > .date{
+    font-size:10px;
+    display: inline-block;
+}
+.ibox-title > .error-sign{
+    position: absolute;
+    top: -8px;
+    left: 5px;
+}
+.ibox-title > .warn-sign{
+    position: absolute;
+    top: -8px;
+    left: 24px;
+}
+.ibox-title > .tool-set{
+    position: absolute;
+    right: 10px;
+    top: -8px;
+}
+.ibox-content{
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 15px;
+    padding-right: 5px;
+}
+.ibox-content > .traffic-span{
+    margin: 0;
+}
+.option{
+    position: absolute;
+    top: 5px;
+    left: 16px;
+}
+.user-box{
+    max-width: 190px;
+}
