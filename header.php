@@ -1,17 +1,17 @@
 <?php
   session_start();
-  
+
   require_once 'db.php';
-  
+
   $db = new DB;
   if(isset($_POST["id"]) && isset($_POST["pw"]))
   {
     $id = $_POST["id"];
     $pw = $_POST["pw"];
     $encrypt_pw = hash("sha256", $pw . $db->getSalt());
-    
+
     $result = $db->mysqli->query("select * from accounts where id='{$id}' and pw ='{$encrypt_pw}'");
-    
+
     if($result->num_rows == 1)
     {
       $result = $result->fetch_array(MYSQLI_ASSOC);
@@ -43,7 +43,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>NetPro-KLP</title>
+    <title>KLP-Firewall</title>
 
     <link href="/assets/lib/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/font/font-awesome/font-awesome.min.css" rel="stylesheet">
@@ -53,11 +53,11 @@
 
     <link href="/assets/lib/css/animate.css" rel="stylesheet">
     <link href="/assets/lib/css/style.css" rel="stylesheet">
-    
+
     <link href="/assets/lib/css/plugins/jQueryUI/jquery-ui-1.10.4.custom.min.css" rel="stylesheet">
 
     <link href="/assets/css/common.css" rel="stylesheet">
-    
+
     <link rel="apple-touch-icon" sizes="57x57" href="/assets/img/favicon.ico/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/assets/img/favicon.ico/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicon.ico/apple-icon-72x72.png">
