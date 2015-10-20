@@ -1,17 +1,19 @@
 <?php
-  
+
   require_once 'db.php';
-  
+
   $db = new DB;
-  
-  $id = $_POST["id"];
-  $pw = $_POST["pw"];
-  $name = $_POST["name"];
-  $position = $_POST["position"];
-  
+
+  $id = $_GET["id"];
+  $pw = $_GET["pw"];
+  $name = $_GET["name"];
+  $position = $_GET["position"];
+  $email = $_GET["email"];
+  $phone = $_GET["phone"];
+
   $encrypt_pw = hash("sha256", $pw . $db->getSalt());
-  
-  $db->mysqli->query("INSERT INTO `accounts`(`id`, `pw`, `name`, `position`) VALUES ('{$id}','{$encrypt_pw}','{$name}','{$position}')");
-  
+
+  $db->mysqli->query("INSERT INTO `accounts`(`id`, `pw`, `name`, `position`,`email`,`phone`) VALUES ('{$id}','{$encrypt_pw}','{$name}','{$position}','{$email}','{$phone}')");
+
   echo "Success";
 ?>
