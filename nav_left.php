@@ -64,7 +64,6 @@
                 <a href="/SC"><i class="fa fa-cog"></i><span class="nav-label">시스템 관리</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li><a href="/SC/Admin-Account">관리자 계정</a></li>
-                    <li><a href="/SC/Setting-Backup-Recovery">설정 백업/복원</a></li>
                     <li><a href="/SC/Notification-Setting">알람 설정</a></li>
                     <li><a href="/SC/ETC-Setting">기타 설정</a></li>
                 </ul>
