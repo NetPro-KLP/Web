@@ -80,8 +80,11 @@
 			move_uploaded_file($_FILES['recovery-file']['tmp_name'] , "/var/www/html/data/rules_data.rules");
 			$rl = fopen("/var/www/html/data/rules_data.rules", "r");
 			while (($line = fgets($rl)) !== false) {
-                $sql = "INSERT INTO `rules_data`(`data`) VALUES ('{$line}')";
-                $db->mysqli->query($sql);
+    			if(isset($line))
+    			{
+                    $sql = "INSERT INTO `rules_data`(`data`) VALUES ('{$line}')";
+                    $db->mysqli->query($sql);
+                }
             }
     	    fclose($rl);
     	    echo "<script>alert('적용 완료');window.location.href = '/RS';</script>";
