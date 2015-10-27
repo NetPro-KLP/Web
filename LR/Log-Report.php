@@ -31,37 +31,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                         <?
-                                            $result = $db->mysqli->query("SELECT packets.source_ip,packets.source_port,packets.destination_ip,packets.destination_port,packets.tcpudp, packet_log.name,packet_log.hazard,packet_log.payload,packet_log.createdAt FROM `packet_log` INNER JOIN packets ON packet_log.packet_idx = packets.idx");
-                                            $n=0;
-                                            while($row = $result->fetch_array(MYSQL_ASSOC))
-                                            {
-                                                $n++;
-                                                echo "<tr id='". $row["idx"] ."'>";
-                                                echo "<td>" . $n . "</td>";
-                                                echo "<td>" . $row["source_ip"] . "</td>";
-                                                echo "<td>" . $row["source_port"] . "</td>";
-                                                echo "<td>" . $row["destination_ip"] . "</td>";
-                                                echo "<td>" . $row["destination_port"] . "</td>";
-                                                 if($row["tcpudp"] == 0)
-                                                    echo "<td>" . 'TCP' . "</td>";
-                                                else
-                                                    echo "<td>" . 'UDP' . "</td>";
-                                                echo "<td>" . $row["name"] . "</td>";
-                                                echo "<td>" . $row["payload"] . "</td>";
-                                                if($row["hazard"] == 0)
-                                                    echo "<td>" . '<span class="label label-warning">경고</span>' . "</td>";
-                                                else
-                                                    echo "<td>" . '<span class="label label-danger">위험</span>' . "</td>";
-                                                echo "<td>" . $row["createdAt"] . "</td>";
-                                                echo "</tr>";
-                                            }
-                                        ?>
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <td colspan="11">
-                                                <ul class="pagination pull-right"></ul>
+                                                <div class="btn-group pull-right pagination">
+
+                                                </div>
                                             </td>
                                         </tr>
                                     </tfoot>
@@ -83,13 +59,7 @@
             <script src="../assets/lib/js/plugins/pace/pace.min.js"></script>
             <script src="/assets/js/common.js"></script>
             <!-- Page-Level Scripts -->
-            <script>
-                $(document).ready(function() {
-
-                    $('.footable').footable();
-
-                });
-            </script>
+            <script src="/assets/js/table.js"></script>
         </div>
     </div>
 </body>
