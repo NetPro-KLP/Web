@@ -6,6 +6,7 @@
     $hazzard = $_POST["hazzard"];
     $payload = $_POST["payload"];
     $date = $_POST["date"];
+    $bunhos = array();
 
 
     $result = $db->mysqli->query("select content from `alarm` where type = 1");
@@ -31,17 +32,16 @@
         array_push($bunhos, $bunho);
     }
 
-    $SENDER = "010-4261-2666";
+    $SENDER = "01042612666";
     $RECEIVERS = $bunhos;
-    $CONTENT = "방화벽 악성 패킷 감지";
     $APPID = "KLP-Firwall";
     $APIKEY = "6dc4fa90786a11e595d00cc47a1fcfae";
 
     $data = array(
-    			"sender" => $SENDER,
-    			"receivers" => $RECEIVERS,
-    			"content" => $CONTENT,
-    		);
+		"sender" => $SENDER,
+		"receivers" => $RECEIVERS,
+		"content" => $content,
+	);
 
     $ch = curl_init("https://api.bluehouselab.com/smscenter/v1.0/sendsms");
     curl_setopt($ch, CURLOPT_TIMEOUT, 30);
@@ -53,6 +53,4 @@
     $response = curl_exec($ch);
     $response_header = curl_getinfo($ch);
     curl_close($ch);
-
-
 ?>
