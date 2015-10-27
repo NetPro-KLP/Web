@@ -24,26 +24,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?
-
-                                        $result = $db->mysqli->query("SELECT SUM(packets.totalbytes) as totalbytes,GeoIP.country,GeoIP.country_code FROM `packets`,`GeoIP` WHERE GeoIP.from_ip_int <= INET_ATON(packets.destination_ip) and GeoIP.to_ip_int >=INET_ATON(packets.destination_ip) GROUP BY GeoIP.country_code order by totalbytes desc");
-                                        $n=0;
-                                        while($row = $result->fetch_array(MYSQL_ASSOC))
-                                        {
-                                            $n++;
-                                            echo "<tr id='". $n ."'>";
-                                            echo "<td>" . $n . "</td>";
-                                            echo "<td>" . $row["country_code"] . "</td>";
-                                            echo "<td>" . $row["country"] . "</td>";
-                                            echo "<td>" . (int)($row["totalbytes"]/1024) . " /MB</td>";
-                                            echo "</tr>";
-                                        }
-                                        ?>
-                                </tbody>
+                                    </tbody>
                                 <tfoot>
                                     <tr>
                                         <td colspan="7">
-                                            <ul class="pagination pull-right"></ul>
+                                            <div class="btn-group pull-right pagination">
+
+                                            </div>
                                         </td>
                                     </tr>
                                 </tfoot>
@@ -71,4 +58,5 @@
     <script src="/assets/lib/js/plugins/toastr/toastr.min.js"></script>
 
     <script src="/assets/js/common.js"></script>
+    <script src="/assets/js/table.js"></script>
 </body>
