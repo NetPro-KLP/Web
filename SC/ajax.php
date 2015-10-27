@@ -10,6 +10,12 @@
 	$type = $_POST["type"];
 	$content = $_POST["content"];
 
+    $hazard = $_POST["hazard"];
+    $bandwidth_from_ip = $_POST["bandwidth_from_ip"];
+    $bandwidth_to_ip = $_POST["bandwidth_to_ip"];
+    $save_packet = $_POST["save_packet"];
+    $remove_packet = $_POST["remove_packet"];
+
 
 	if($type == "save")
 	{
@@ -29,6 +35,11 @@
     else if($type =="remove")
     {
         $sql = "DELETE FROM `alarm` where idx='{$content}'";
+        $db->mysqli->query($sql);
+    }
+    else if($type =="save_settings")
+    {
+        $sql = "UPDATE `system` SET `hazzard`='{$hazard}',`bandwidth_from_ip`='{$bandwidth_from_ip}',`bandwidth_to_ip`='{$bandwidth_to_ip}',`save_packet`='{$save_packet}',`remove_packet`='{$remove_packet}' WHERE 1";
         $db->mysqli->query($sql);
     }
 ?>

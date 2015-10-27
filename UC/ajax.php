@@ -45,8 +45,8 @@
                         $n++;
                         echo '<tr>';
                         echo '<td>' . $n . '</td>';
-                        echo '<td>' . $row["source_ip"] . ":" . $row["source_port"] . '</td>';
-                        echo '<td>' . $row["destination_ip"] . ":" . $row["destination_port"] . '</td>';
+                        echo '<td>' . long2ip($row["source_ip"]) . ":" . $row["source_port"] . '</td>';
+                        echo '<td>' . long2ip($row["destination_ip"]) . ":" . $row["destination_port"] . '</td>';
                         if($row["tcporudp"] == 0)
                             echo '<td>TCP</td>';
                         else
@@ -91,4 +91,58 @@
         $sql = "DELETE FROM users where idx='{$code}'";
         $db->mysqli->query($sql);
     }
+    else if($operation == "table")
+    {
+
+        $code*=10;
+
+        $sql = "select users.idx,users.ip,users.createdAt,users.connectedAt,users.status, SUM(packets.totalbytes) as traffic from users left join packets on users.ip = packets.source_ip or users.ip = packets.destination_ip GROUP BY users.ip ORDER BY traffic DESC";
+
+        $result = $db->mysqli->query($sql);
+
+
+        $total["total"] = intval($result->num_rows/10);
+
+        if($result->num_rows%10 != 0)
+            $total["total"]++;
+
+        $sql .= " LIMIT {$code},10";
+
+        unset($result);
+
+        $result = $db->mysqli->query($sql);
+
+        echo json_encode($total);
+        echo "&";
+
+        while($row = $result->fetch_array(MYSQL_ASSOC))
+        {
+            echo "<tr id='". $row["idx"] ."'>";
+            echo "<td>" . $row["idx"] . "</td>";
+            echo "<td>" . long2ip($row["ip"]) . "</td>";
+            echo "<td>" . $row["createdAt"] . "</td>";
+            echo "<td>" . $row["connectedAt"] . "</td>";
+            if ($row["traffic"] == "")
+                $row["traffic"] = "0";
+            $row["traffic"] .= "/MB";
+            echo "<td>" . $row["traffic"] . "</td>";
+            if($row["status"] == 0)
+                echo "<td>" . '<span class="label label-success">정상</span>' . "</td>";
+            else
+                echo "<td>" . '<span class="label label-danger">차단</span>' . "</td>";
+            echo '<td class="center">
+                        <div class="btn-group">
+                            <button class="btn-white btn btn-xs show-packet" data-toggle="modal" data-target="Packet-Modal">패킷보기</button>
+                            ';
+                        if($row["status"] == 0)
+                            echo '<button class="btn-white btn btn-xs block">차단하기</button>';
+                        else
+                            echo '<button class="btn-white btn btn-xs unblock">차단해체</button>';
+                        echo '<button class="btn-white btn btn-xs remove">지우기</button>
+                        </div>
+                    </td>';
+            echo "</tr>";
+        }
+    }
+
 ?>
