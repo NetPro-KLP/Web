@@ -21,6 +21,20 @@
                 <a href="/"><i class="fa fa-th-large"></i> <span class="nav-label">대쉬보드</span></a>
             </li>
             <li>
+                <a href="/UC"><i class="fa fa-sitemap"></i> <span class="nav-label">내부 유저 관리</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="/UC/Control-Panel">실시간 관제</a></li>
+                    <li><a href="/UC/User-Table">유저 테이블</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/GeoIP"><i class="fa fa-globe"></i> <span class="nav-label">국가별 정보</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="/GeoIP/Country-Traffic">국가별 트래픽</a></li>
+                    <li><a href="/GeoIP/Traffic-Table">트래픽 테이블</a></li>
+                </ul>
+            </li>
+            <li>
                 <a href="/LR/Log-Report">
                 <i class="fa fa-database"></i>
                 <span class="nav-label">악성 트래픽 리포트</span>
@@ -33,16 +47,9 @@
                 </a>
             </li>
             <li>
-                <a href="/UC"><i class="fa fa-sitemap"></i> <span class="nav-label">내부 유저 관리</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="/UC/Control-Panel">실시간 관제</a></li>
-                    <li><a href="/UC/User-Table">유저 테이블</a></li>
-                </ul>
-            </li>
-            <li>
                 <a href="/PA"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">패킷 분석</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a href="/PA/Trafic-Stats">트래픽 통계</a></li>
+                    <li><a href="/PA/Traffic-Stats">트래픽 통계</a></li>
                     <li><a href="/PA/Packet-Table">패킷 테이블</a></li>
                 </ul>
             </li>
@@ -51,13 +58,6 @@
                 <ul class="nav nav-second-level collapse">
                     <li><a href="/RS/Ruleset-Table">룰셋 테이블</a></li>
                     <li><a href="/RS/Ruleset-Backup-Recovery">룰셋 백업/복원</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="/GeoIP"><i class="fa fa-globe"></i> <span class="nav-label">국가별 정보</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="/GeoIP/Country-Traffic">국가별 트래픽</a></li>
-                    <li><a href="/GeoIP/Traffic-Table">트래픽 테이블</a></li>
                 </ul>
             </li>
             <li>
