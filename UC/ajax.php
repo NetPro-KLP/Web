@@ -37,6 +37,7 @@
                     </thead>
                     <tbody>
                     ';
+                    $code = ip2long($code);
 
                     $result = $db->mysqli->query("SELECT * FROM `packets` WHERE source_ip ='{$code}' or destination_ip='{$code}'");
                     $n=0;
@@ -124,7 +125,8 @@
             echo "<td>" . $row["connectedAt"] . "</td>";
             if ($row["traffic"] == "")
                 $row["traffic"] = "0";
-            $row["traffic"] .= "/MB";
+            $row["traffic"] = number_format($row["traffic"]);
+            $row["traffic"] .= "/KB";
             echo "<td>" . $row["traffic"] . "</td>";
             if($row["status"] == 0)
                 echo "<td>" . '<span class="label label-success">정상</span>' . "</td>";
@@ -142,6 +144,63 @@
                         </div>
                     </td>';
             echo "</tr>";
+        }
+    }
+    else if($operation == "Usertable")
+    {
+        $code*=24;
+
+        $sql = "SELECT users.idx, users.ip,users.connectedAt,users.status,SUM(packets.totalbytes) as traffic,SUM(packets.danger) as danger,SUM(packets.warn) as warn FROM users JOIN packets ON users.ip = packets.source_ip or users.ip = packets.destination_ip GROUP BY users.idx";
+
+        $result = $db->mysqli->query($sql);
+
+        $total["total"] = intval($result->num_rows/24);
+
+        if($result->num_rows%24 != 0)
+            $total["total"]++;
+
+        $sql .= " LIMIT {$code},24";
+
+        unset($result);
+
+        $result = $db->mysqli->query($sql);
+
+        echo json_encode($total);
+        echo "&";
+
+        $n=0;
+
+        while($row = $result->fetch_array(MYSQL_ASSOC))
+        {
+            echo '<div class="col-xs-6 col-lg-2 user-box" id="' . $row["idx"] . '"><div class="ibox float-e-margins"><div class="ibox-title">';
+            echo '<span class="badge badge-danger error-sign">' . $row["danger"] . '</span>';
+            echo '<span class="badge badge-warning warn-sign">' . $row["warn"] . '</span>';
+            if($row["status"] == 0)
+            {
+                echo '<span class="label label-success pull-right">정상</span>';
+                $blockclass = "block";
+                $blocktext = "차단하기";
+            }
+            else
+            {
+                echo '<span class="label label-danger pull-right">차단</span>';
+                $blockclass = "unblock";
+                $blocktext = "차단해체";
+            }
+
+            echo '<a class="dropdown-toggle tool-set" data-toggle="dropdown" href="#"><i class="fa fa-wrench"></i></a>';
+            echo '<ul class="dropdown-menu dropdown-user option">
+                    <li><a class="show-packet" href="#">패킷보기</a></li>
+                    <li><a class="' . $blockclass . '" href="#">' . $blocktext . '</a></li>
+                    <li><a class="remove" href="#">지우기</a></li>
+                </ul>';
+
+            echo '<h5 class="ip">' . long2ip($row["ip"]) . '</h5>';
+            echo '<h7 class="date">' . $row["connectedAt"] . '</h7></div>';
+            echo '<div class="ibox-content"><h5 class="traffic-span">Traffic</h5>';
+            echo '<span><small>' . number_format(intval($row["traffic"]/1024)) . '/MB</small></span>';
+            echo '<span data-diameter="10" class="updating-chart" data-chart="' . $row["idx"] .'"></span>';
+            echo '</div></div></div>';
         }
     }
 
