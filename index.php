@@ -1,9 +1,21 @@
 <?php include_once 'header.php'; ?>
+<link href="/assets/css/Country-Traffic.css" rel="stylesheet">
 <body class="skin-1">
     <div id="wrapper">
         <?php include_once 'nav_left.php'; ?>
         <div id="page-wrapper" class="gray-bg">
             <?php include_once 'nav_top.php'; ?>
+            <?
+                $sql1 = $db->mysqli->query("SELECT sum(packets.totalbytes) as sum FROM users JOIN packets ON users.ip = packets.source_ip");
+                $sql2 = $db->mysqli->query("SELECT sum(packets.totalbytes) as sum FROM users JOIN packets ON users.ip = packets.destination_ip");
+                $sql3 = $db->mysqli->query("SELECT count(idx) as count FROM packets");
+                $sql4 = $db->mysqli->query("SELECT count(idx) as count FROM users");
+                $sql5 = $db->mysqli->query("SELECT * from packet_log");
+                $row1 = mysqli_fetch_assoc($sql1);
+                $row2 = mysqli_fetch_assoc($sql2);
+                $row3 = mysqli_fetch_assoc($sql3);
+                $row4 = mysqli_fetch_assoc($sql4);
+            ?>
             <div class="wrapper wrapper-content">
                 <div class="row">
                     <div class="col-lg-3">
@@ -13,7 +25,7 @@
                                 <h5>인바운드</h5>
                             </div>
                             <div class="ibox-content">
-                                <h1 class="no-margins">40,886,200</h1>
+                                <h1 class="no-margins"><?=number_format($row1['sum']/1024)?></h1>
                                 <small>/MB</small>
                             </div>
                         </div>
@@ -25,7 +37,7 @@
                                 <h5>아웃바운드</h5>
                             </div>
                             <div class="ibox-content">
-                                <h1 class="no-margins">275,800</h1>
+                                <h1 class="no-margins"><?=number_format($row2['sum']/1024)?></h1>
                                 <small>/MB</small>
                             </div>
                         </div>
@@ -37,7 +49,7 @@
                                 <h5>패킷</h5>
                             </div>
                             <div class="ibox-content">
-                                <h1 class="no-margins">106,120</h1>
+                                <h1 class="no-margins"><?=number_format($row3['count'])?></h1>
                                 <small>개</small>
                             </div>
                         </div>
@@ -48,7 +60,7 @@
                                 <h5>내부 유저</h5>
                             </div>
                             <div class="ibox-content">
-                                <h1 class="no-margins">150</h1>
+                                <h1 class="no-margins"><?=number_format($row4['count'])?></h1>
                                 <small>명</small>
                             </div>
                         </div>
@@ -78,7 +90,7 @@
                                         <ul class="stat-list">
                                             <li>
                                                 <h2 class="no-margins">2,346</h2>
-                                                <small>Inbound</small>
+                                                <small>TCP</small>
                                                 <div class="stat-percent">48% <i class="fa fa-level-up text-navy"></i></div>
                                                 <div class="progress progress-mini">
                                                     <div style="width: 48%;" class="progress-bar"></div>
@@ -86,18 +98,10 @@
                                             </li>
                                             <li>
                                                 <h2 class="no-margins ">4,422</h2>
-                                                <small>OutBound</small>
+                                                <small>UDP</small>
                                                 <div class="stat-percent">60% <i class="fa fa-level-down text-navy"></i></div>
                                                 <div class="progress progress-mini">
                                                     <div style="width: 60%;" class="progress-bar"></div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <h2 class="no-margins ">9,180</h2>
-                                                <small>Monthly income from orders</small>
-                                                <div class="stat-percent">22% <i class="fa fa-bolt text-navy"></i></div>
-                                                <div class="progress progress-mini">
-                                                    <div style="width: 22%;" class="progress-bar"></div>
                                                 </div>
                                             </li>
                                         </ul>
@@ -123,73 +127,27 @@
                             </div>
                             <div class="ibox-content ibox-heading">
                                 <h3><i class="fa fa-envelope-o"></i> 새로운 로그</h3>
-                                <small><i class="fa fa-tim"></i>아직 읽지 않은 패킷 차단 로그가 15개 있습니다.</small>
+                                <small><i class="fa fa-tim"></i>아직 읽지 않은 패킷 차단 로그가 <?=$sql5->num_rows?>개 있습니다.</small>
                             </div>
                             <div class="ibox-content">
                                 <div class="feed-activity-list">
+                                    <?
+                                    while($row5 = $sql5->fetch_array(MYSQL_ASSOC)){
+                                        if($row5["hazard"] == 0)
+                                            $row5["hazard"] = "<i class=\"fa fa-circle text-warning\"></i>";
+                                        else
+                                            $row5["hazard"] = "<i class=\"fa fa-circle text-danger\"></i>";
+                                    ?>
                                     <div class="feed-element">
                                         <div>
-                                            <small class="pull-right text-navy">1m ago</small>
-                                            <i class="fa fa-circle text-danger"></i> <strong>PingPong Virus</strong>
-                                            <small class="text-muted">2015-01-01 12:00:00</small>
+                                            <small class="pull-right text-navy">[ <?=$row5["payload"]?> ]</small>
+                                            <?=$row5["hazard"]?> <strong><?=$row5["name"]?></strong>
+                                            <small class="text-muted"><?=$row5["createdAt"]?></small>
                                         </div>
                                     </div>
-                                    <div class="feed-element">
-                                        <div>
-                                            <small class="pull-right text-navy">1m ago</small>
-                                            <i class="fa fa-circle text-warning"></i> <strong>PingPong Virus</strong>
-                                            <small class="text-muted">2015-01-01 12:00:00</small>
-                                        </div>
-                                    </div>
-                                    <div class="feed-element">
-                                        <div>
-                                            <small class="pull-right text-navy">1m ago</small>
-                                            <i class="fa fa-circle text-danger"></i> <strong>PingPong Virus</strong>
-                                            <small class="text-muted">2015-01-01 12:00:00</small>
-                                        </div>
-                                    </div>
-                                    <div class="feed-element">
-                                        <div>
-                                            <small class="pull-right text-navy">1m ago</small>
-                                            <i class="fa fa-circle text-danger"></i> <strong>PingPong Virus</strong>
-                                            <small class="text-muted">2015-01-01 12:00:00</small>
-                                        </div>
-                                    </div>
-                                    <div class="feed-element">
-                                        <div>
-                                            <small class="pull-right text-navy">1m ago</small>
-                                            <i class="fa fa-circle text-danger"></i> <strong>PingPong Virus</strong>
-                                            <small class="text-muted">2015-01-01 12:00:00</small>
-                                        </div>
-                                    </div>
-                                    <div class="feed-element">
-                                        <div>
-                                            <small class="pull-right text-navy">1m ago</small>
-                                            <i class="fa fa-circle text-danger"></i> <strong>PingPong Virus</strong>
-                                            <small class="text-muted">2015-01-01 12:00:00</small>
-                                        </div>
-                                    </div>
-                                    <div class="feed-element">
-                                        <div>
-                                            <small class="pull-right text-navy">1m ago</small>
-                                            <i class="fa fa-circle text-warning"></i> <strong>PingPong Virus</strong>
-                                            <small class="text-muted">2015-01-01 12:00:00</small>
-                                        </div>
-                                    </div>
-                                    <div class="feed-element">
-                                        <div>
-                                            <small class="pull-right text-navy">1m ago</small>
-                                            <i class="fa fa-circle text-danger"></i> <strong>PingPong Virus</strong>
-                                            <small class="text-muted">2015-01-01 12:00:00</small>
-                                        </div>
-                                    </div>
-                                    <div class="feed-element">
-                                        <div>
-                                            <small class="pull-right text-navy">1m ago</small>
-                                            <i class="fa fa-circle text-danger"></i> <strong>PingPong Virus</strong>
-                                            <small class="text-muted">2015-01-01 12:00:00</small>
-                                        </div>
-                                    </div>
+                                    <?
+                                    }
+                                    ?>
                                 </div>
                             </div>
                         </div>
@@ -202,8 +160,17 @@
                             <div class="ibox-content">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <div id="world-map" style="height: 520px;"></div>
+                                        <div id="world-map" style="height: 480px;"></div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="ibox-footer">
+                                <div class="size-group">
+                                    <span class="label">차단됨</span>
+                                    <span class="label label-danger">30,000MB 이상</span>
+                                    <span class="label label-warning">10,000MB 이상</span>
+                                    <span class="label label-success">100MB 이상</span>
+                                    <span class="label label-primary">0MB</span>
                                 </div>
                             </div>
                         </div>
@@ -489,7 +456,113 @@
          };
          toastr.success('<?=$result["name"]?> 서버 관리자님 환영합니다.', 'KLP-Firewall');
         }, 1300);
+
+        var mapData;
+        var mapColor = {};
+        var levelcolor = ['#ed5565','#f8ac59','#1c84c6'];
+
+        function block(func,code)
+        {
+            $.ajax({
+                type: 'POST',
+                url: "/GeoIP/ajax.php",
+                data: "oper=" + func + "&code=" + code,
+                success: function(res){
+                    if(func == "block")
+                        mapColor[code] = "#d1dade";
+                    else
+                    {
+                        if(!mapData[code])
+                            mapColor[code] = "#1ab394";
+                        else
+                        {
+                            var mbValue = mapData[code]/1024;
+                            if(mbValue >= 30000)
+                                mapColor[code] = levelcolor[0];
+                            else if(mbValue >= 10000)
+                                mapColor[code] = levelcolor[1];
+                            else if(mbValue >= 100)
+                                mapColor[code] = levelcolor[2];
+                        }
+                    }
+                    var map = $('#world-map').vectorMap('get', 'mapObject');
+                    map.series.regions[0].setValues(mapColor);
+                },
+                error:function(err){
+                    alert("데이터를 가져오는데 실패하였습니다.");
+                }
+            });
+        }
+        $(document).ready(function(){
+           $.ajax({
+                type: 'POST',
+                url: "/GeoIP/ajax.php",
+                data: "oper=trafficall",
+                success: function(res){
+                    mapData = JSON.parse(res);
+                    for(var Code in mapData){
+                        var mbValue = mapData[Code]/1024;
+                        if(mbValue >= 30000)
+                            mapColor[Code] = levelcolor[0];
+                        else if(mbValue >= 10000)
+                            mapColor[Code] = levelcolor[1];
+                        else if(mbValue >= 100)
+                            mapColor[Code] = levelcolor[2];
+                    }
+                },
+                async: false,
+                error:function(err){
+                    alert("데이터를 가져오는데 실패하였습니다.");
+                }
+            });
+            $.ajax({
+                type: 'POST',
+                url: "/GeoIP/ajax.php",
+                data: "oper=blacklist",
+                success: function(res){
+                    var temp = res.split(",");
+                    for(var i=0;i<temp.length;i++)
+                        mapColor[temp[i]] = '#d1dade';
+                },
+                async: false,
+                error:function(err){
+                    alert("데이터를 가져오는데 실패하였습니다.");
+                }
+            });
+            var map = $('#world-map').vectorMap('get', 'mapObject');
+            map.series.regions[0].setValues(mapColor);
+        });
+        $('#world-map').vectorMap({
+               map: 'world_mill_en',
+               backgroundColor: "transparent",
+               regionStyle: {
+                   initial: {
+                       fill: '#1ab394',
+                       "fill-opacity": 0.9,
+                       stroke: 'none',
+                       "stroke-width": 0,
+                       "stroke-opacity": 0
+                   }
+               },
+            onRegionClick: function(event, code) {
+                if(mapColor[code] == "#d1dade")
+                    block("unblock",code);
+                else
+                    block("block",code);
+            },
+            series: {
+            regions: [{
+                   values: mapData,
+                   attribute: 'fill'
+               }]
+            },
+            onRegionTipShow: function(e, el, code){
+                if(mapData[code])
+                    el.html(el.html() + "<br>Traffic - " + mapData[code].toLocaleString() + "KB");
+            }
+        });
     </script>
+
     <script src="/assets/js/common.js"></script>
 </body>
 </html>
