@@ -3,13 +3,14 @@
     $db = new db();
 
     $name = $_POST["name"];
+    echo $name;
     $hazzard = $_POST["hazzard"];
     $payload = $_POST["payload"];
     $date = $_POST["date"];
     $bunhos = array();
 
 
-    $result = $db->mysqli->query("select content from `alarm` where type = 1");
+    $result = $db->mysqli->query("select content from `alarm` where type = 0");
     $row = $result->fetch_array(MYSQL_ASSOC);
     $content = $row["content"];
 
@@ -26,7 +27,7 @@
         mail($mailto,$subject,$content,$headers);
     }
 
-    $result = $db->mysqli->query("select content from `alarm` where type = 3");
+    $result = $db->mysqli->query("select content from `alarm` where type = 1");
     while($row = $result->fetch_array(MYSQL_ASSOC)){
         $bunho = str_replace("-", "", $row["content"]);
         array_push($bunhos, $bunho);
