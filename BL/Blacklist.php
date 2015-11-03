@@ -77,6 +77,9 @@
                closeOnEscape: true,
                closeAfterEdit: true,
                editData: {
+                   ip: function () {
+                   return $("#table_list").jqGrid('getCell', $("#table_list").jqGrid('getGridParam','selrow') , 'ip');
+               },
                idx: function () {
                    return $("#table_list").jqGrid('getCell', $("#table_list").jqGrid('getGridParam','selrow') , 'hontto-idx');
                }
@@ -98,6 +101,9 @@
                closeOnEscape: true,
                closeAfterEdit: true,
                delData: {
+               ip: function () {
+                   return $("#table_list").jqGrid('getCell', $("#table_list").jqGrid('getGridParam','selrow') , 'ip');
+               },
                idx: function () {
                    return $("#table_list").jqGrid('getCell', $("#table_list").jqGrid('getGridParam','selrow') , 'hontto-idx');
                }

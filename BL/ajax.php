@@ -23,7 +23,7 @@
 
 	if($operation == "add")
 	{
-    	if(strlen($ip) == 2)
+    	if(strlen($ip) != 2)
     	    $sql = "INSERT INTO `IP_Blacklist`(`ip`, `port`, `protocol`, `createdAt`) VALUES ('{$ip}','{$port}','{$protocol}','{$date}')";
         else
             $sql = "INSERT INTO `GeoIP_Blacklist`(`country_code`, `createdAt`) VALUES ('{$ip}','{$date}')";
@@ -32,7 +32,7 @@
 	}
 	else if($operation == "edit")
 	{
-        if(strlen($ip) == 2)
+        if(strlen($ip) != 2)
     	    $sql = "UPDATE `IP_Blacklist` SET `ip`='{$ip}',`port`='{$port}',`protocol`='{$protocol}' WHERE `idx` = '{$id}'";
         else
             $sql = "UPDATE `GeoIP_Blacklist` SET `country_code`='{$ip}' WHERE `idx` = '{$id}'";
@@ -43,7 +43,7 @@
 	}
 	else if($operation == "del")
 	{
-    	if(strlen($ip) == 2)
+    	if(strlen($ip) != 2)
     	    $sql = "DELETE FROM `IP_Blacklist`  WHERE `idx` = '{$id}'";
         else
             $sql = "DELETE FROM `GeoIP_Blacklist`  WHERE `idx` = '{$id}'";
