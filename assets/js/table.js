@@ -17,8 +17,8 @@ function getData(page){
 }
 function Pagination(totalPages, nowPage, limit)
 {
-	$('.pagination').empty();
-	$('.pagination').html('<button type="button" class="btn btn-white PREV"><i class="fa fa-chevron-left"></i></button>');
+	$('.pagination2').empty();
+	$('.pagination2').html('<button type="button" class="btn btn-white PREV"><i class="fa fa-chevron-left"></i></button>');
 	var currentPage = lowerLimit = upperLimit = Math.min(nowPage, totalPages);
 
 	for (var b = 1; b < limit && b < totalPages;) {
@@ -27,12 +27,12 @@ function Pagination(totalPages, nowPage, limit)
 	}
 
 	for (var i = lowerLimit; i <= upperLimit; i++) {
-	    if (i == currentPage) $('.pagination').append('<button class="btn btn-white active">' + i + '</button>');
-	    else $('.pagination').append('<button class="btn btn-white">' + i + '</button>');
+	    if (i == currentPage) $('.pagination2').append('<button class="btn btn-white active">' + i + '</button>');
+	    else $('.pagination2').append('<button class="btn btn-white">' + i + '</button>');
 	}
-	$('.pagination').append('<button type="button" class="btn btn-white NEXT"><i class="fa fa-chevron-right"></i> </button>');
+	$('.pagination2').append('<button type="button" class="btn btn-white NEXT"><i class="fa fa-chevron-right"></i> </button>');
 
-	$(".pagination > button").click(function(){
+	$(".pagination2 > button").click(function(){
 		var page = $(this).text();
 
 		if($(this).hasClass("PREV"))
