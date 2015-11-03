@@ -28,7 +28,7 @@
                                 <tfoot>
                                     <tr>
                                         <td colspan="7">
-                                            <div class="btn-group pull-right pagination">
+                                            <div class="btn-group pull-right pagination2">
 
                                             </div>
                                         </td>
