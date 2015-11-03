@@ -39,9 +39,9 @@
             $n++;
             echo "<tr id='". $row["idx"] ."'>";
             echo "<td>" . $n . "</td>";
-            echo "<td>" . $row["source_ip"] . "</td>";
+            echo "<td>" . long2ip($row["source_ip"]) . "</td>";
             echo "<td>" . $row["source_port"] . "</td>";
-            echo "<td>" . $row["destination_ip"] . "</td>";
+            echo "<td>" . long2ip($row["destination_ip"]) . "</td>";
             echo "<td>" . $row["destination_port"] . "</td>";
              if($row["tcpudp"] == 0)
                 echo "<td>" . 'TCP' . "</td>";
