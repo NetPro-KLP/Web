@@ -33,7 +33,7 @@
                                     <tfoot>
                                         <tr>
                                             <td colspan="7">
-                                                <div class="btn-group pull-right pagination">
+                                                <div class="btn-group pull-right pagination2">
 
                                                 </div>
                                             </td>
@@ -58,7 +58,7 @@
             <script src="/assets/js/common.js"></script>
             <!-- Page-Level Scripts -->
             <script>
-                var ajaxcall = function(action,idx){
+                function ajaxcall(action,idx){
                     $.ajax({
                         type: 'POST',
                         url: "./ajax.php",
@@ -79,16 +79,16 @@
                         }
                     });
                 }
-                $(".show-packet").on("click",function(){
+                $(document).on("click",".show-packet",function(){
                     ajaxcall("show",$(this).parents("tr").children("td").eq(1).text());
                 });
-                $(".block").on("click",function(){
+                $(document).on("click",".block",function(){
                     ajaxcall("block",$(this).parents("tr").attr("id"));
                 });
-                $(".unblock").on("click",function(){
+                $(document).on("click",".unblock",function(){
                     ajaxcall("unblock",$(this).parents("tr").attr("id"));
                 });
-                $(".remove").on("click",function(){
+                $(document).on("click",".remove",function(){
                     ajaxcall("remove",$(this).parents("tr").attr("id"));
                 });
             </script>
