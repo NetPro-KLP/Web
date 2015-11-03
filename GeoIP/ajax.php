@@ -52,10 +52,9 @@
   {
         $code*=10;
 
-        $sql = "SELECT SUM(packets.totalbytes) as totalbytes,GeoIP.country,GeoIP.country_code FROM `packets`,`GeoIP` WHERE GeoIP.from_ip_int <= INET_ATON(packets.destination_ip) and GeoIP.to_ip_int >=INET_ATON(packets.destination_ip) GROUP BY GeoIP.country_code order by totalbytes desc";
+        $sql = "SELECT SUM(packets.totalbytes) as totalbytes,GeoIP.country,GeoIP.country_code FROM `packets`,`GeoIP` WHERE GeoIP.from_ip_int <= packets.destination_ip and GeoIP.to_ip_int >=packets.destination_ip GROUP BY GeoIP.country_code order by totalbytes desc";
 
         $result = $db->mysqli->query($sql);
-
 
         $total["total"] = intval($result->num_rows/10);
 
