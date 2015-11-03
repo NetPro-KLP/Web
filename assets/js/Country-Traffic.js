@@ -99,6 +99,6 @@ $('#world-map').vectorMap({
     },
     onRegionTipShow: function(e, el, code){
         if(mapData[code])
-            el.html(el.html() + "<br>Traffic - " + mapData[code] + "KB");
+            el.html(el.html() + "<br>Traffic - " + mapData[code].toLocaleString() + "KB");
     }
 });
