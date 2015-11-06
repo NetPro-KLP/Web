@@ -6,8 +6,8 @@
         <div id="page-wrapper" class="gray-bg">
             <?php include_once 'nav_top.php'; ?>
             <?
-                $sql1 = $db->mysqli->query("SELECT sum(packets.totalbytes) as sum FROM users JOIN packets ON users.ip = packets.source_ip");
-                $sql2 = $db->mysqli->query("SELECT sum(packets.totalbytes) as sum FROM users JOIN packets ON users.ip = packets.destination_ip");
+                $sql1 = $db->mysqli->query("SELECT sum(packets.totalbytes) as sum FROM users JOIN packets ON users.ip = packets.destination_ip");
+                $sql2 = $db->mysqli->query("SELECT sum(packets.totalbytes) as sum FROM users JOIN packets ON users.ip = packets.source_ip");
                 $sql3 = $db->mysqli->query("SELECT count(idx) as count FROM packets");
                 $sql4 = $db->mysqli->query("SELECT count(idx) as count FROM users");
                 $sql5 = $db->mysqli->query("SELECT * from packet_log");
