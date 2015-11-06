@@ -46,7 +46,7 @@
             else
                 echo '<td>UDP</td>';
             echo '<td>' . $row["packet_count"] . '</td>';
-            echo '<td>' . $row["totalbytes"] . '</td>';
+            echo '<td>' . number_format(intval($row["totalbytes"]/1024)) . '/MB</td>';
             echo '<td>' . $row["starttime"] . '</td>';
             echo '<td>' . $row["endtime"] . '</td>';
             echo '<td>' . $row["danger"] . '개</td>';
