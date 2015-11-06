@@ -11,7 +11,7 @@
                     <div class="User-Panel">
                     </div>
                 </div>
-                <div class="row"><div class="btn-group pull-right pagination2"></div></div>
+                <!--<div class="row"><div class="btn-group pull-right pagination2"></div></div>-->
             </div>
         </div>
     </div>
