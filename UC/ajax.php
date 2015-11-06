@@ -125,8 +125,8 @@
             echo "<td>" . $row["connectedAt"] . "</td>";
             if ($row["traffic"] == "")
                 $row["traffic"] = "0";
-            $row["traffic"] = number_format($row["traffic"]);
-            $row["traffic"] .= "/KB";
+            $row["traffic"] = number_format(intval($row["traffic"]/1024));
+            $row["traffic"] .= "/MB";
             echo "<td>" . $row["traffic"] . "</td>";
             if($row["status"] == 0)
                 echo "<td>" . '<span class="label label-success">정상</span>' . "</td>";
