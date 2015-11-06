@@ -1,11 +1,28 @@
 $.getScript("/assets/lib/js/socket.io.js", function(){
     var socket = io.connect('http://172.16.100.61:8888');
 
-                new Chartist.Line('#ct-chart1', {
-                labels: ['월요일', '화요일', '수요일', '목요일', '금요일','토요일','일요일'],
+    socket.emit('inoutbound week', {});
+    socket.on("inoutbound week res", function(data) {
+        console.log(data);
+    	if(data.code == 200)
+    	{
+        	var label = [];
+        	var inbound = [];
+        	var outbound = [];
+        	for(i=0;i<7;i++)
+        	{
+            	var temp = data.weekDate[0][i];
+            	label.push(temp);
+            	var temp = data.inbound[0][i];
+            	inbound.push(temp);
+            	var temp = data.outbound[0][i];
+            	outbound.push(temp);
+        	}
+        	new Chartist.Line('#ct-chart1', {
+                labels: label,
                 series: [
-                    [12, 9, 7, 8, 5,6,3],
-                    [2, 1, 3.5, 7, 3,6,3]
+                    inbound,
+                    outbound
                 ]
             }, {
                 fullWidth: true,
@@ -13,6 +30,9 @@ $.getScript("/assets/lib/js/socket.io.js", function(){
                     right: 30
                 }
             });
+    	}
+    });
+
 
     socket.emit('barStatistics dangerWarn', {});
     socket.on("barStatistics dangerWarn res", function(data) {
@@ -63,6 +83,7 @@ $.getScript("/assets/lib/js/socket.io.js", function(){
         };
         $.plot($("#flot-bar-chart"), [barData], barOptions);
     });
+
     socket.emit('tcpudp hour', {});
     socket.on("tcpudp hour res", function(data) {
         if(data.code == 200)
@@ -138,58 +159,56 @@ $.getScript("/assets/lib/js/socket.io.js", function(){
         else
             alert("커넥션이 종료 되었습니다. 페이지를 새로고침을 해주시기 바랍니다.");
     });
-    $(function() {
-        socket.emit('protocol statistics', {});
-        socket.on("protocol statistics res", function(data) {
-            $(function() {
-                var colors = ["#d3d3d3","#bababa","#79d2c0","#1ab394"];
 
-                var dataa = [];
+    socket.emit('protocol statistics', {});
+    socket.on("protocol statistics res", function(data) {
+        $(function() {
+            var colors = ["#d3d3d3","#bababa","#79d2c0","#1ab394"];
 
-                var n = 0;
-                for(i in data)
-                {
-                    if(i == "code")
-                        continue;
-                    var temp = new Object();
-                    temp.label = i;
-                    temp.data = data[i];
-                    temp.color = colors[n];
-                    n++;
-                    dataa.push(temp);
-                }
+            var dataa = [];
 
-                var plotObj = $.plot($("#flot-pie-chart"), dataa, {
-                    series: {
-                        pie: {
-                            show: true
-                        }
-                    },
-                    grid: {
-                        hoverable: true
-                    },
-                    tooltip: true,
-                    tooltipOpts: {
-                        content: "%p.0%, %s", // show percentages, rounding to 2 decimal places
-                        shifts: {
-                            x: 20,
-                            y: 0
-                        },
-                        defaultTheme: false
+            var n = 0;
+            for(i in data)
+            {
+                if(i == "code")
+                    continue;
+                var temp = new Object();
+                temp.label = i;
+                temp.data = data[i];
+                temp.color = colors[n];
+                n++;
+                dataa.push(temp);
+            }
+
+            var plotObj = $.plot($("#flot-pie-chart"), dataa, {
+                series: {
+                    pie: {
+                        show: true
                     }
-                });
-
+                },
+                grid: {
+                    hoverable: true
+                },
+                tooltip: true,
+                tooltipOpts: {
+                    content: "%p.0%, %s", // show percentages, rounding to 2 decimal places
+                    shifts: {
+                        x: 20,
+                        y: 0
+                    },
+                    defaultTheme: false
+                }
             });
+
         });
     });
-    $(function() {
 
     var container = $("#flot-line-chart-moving");
 
     // Determine how many data points to keep based on the placeholder's initial size;
     // this gives us a nice high-res plot while avoiding more than one point per pixel.
 
-    var maximum = container.outerWidth() / 2 || 200;
+    var maximum = container.outerWidth() / 2 || 250;
 
     //
     var data = [];
@@ -285,6 +304,4 @@ $.getScript("/assets/lib/js/socket.io.js", function(){
         plot.setData(series);
         plot.draw();
     }, 40);
-
-    });
 });
