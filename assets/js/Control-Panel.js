@@ -53,9 +53,11 @@ $.getScript("/assets/lib/js/socket.io.js", function(){
                     value.push(data[i][j].trafficPercentage);
                 $(".updating-chart[data-chart='" + i + "']").peity("line", { fill: '#0e9aef',stroke:'#1c84c6', width: 128 }).text(value.join(",")).change();
                 value = $(".updating-chart[data-chart='" + i + "']").text().split(",");
-                totaltraffic = totaltraffic(data[i][data[i].length-1].totaltraffic/1024);
-                $(".updating-chart[data-chart='" + i + "']").parent().find("small").text(totaltraffic.toLocaleString() + "/MB");
+                totalbytes = parseInt(data[i][data[i].length-1].totalbytes/1024);
+                $(".updating-chart[data-chart='" + i + "']").parent().find("small").text(totalbytes.toLocaleString() + "/MB");
                 $(".updating-chart[data-chart='" + i + "']").parent().parent().find("h7").text(data[i][data[i].length-1].endtime);
+                $(".updating-chart[data-chart='" + i + "']").parent().parent().find(".error-sign").text(data[i][data[i].length-1].totaldanger);
+                $(".updating-chart[data-chart='" + i + "']").parent().parent().find(".warn-sign").text(data[i][data[i].length-1].totalwarn);
             }
         }
         else
