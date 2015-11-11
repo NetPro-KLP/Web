@@ -173,8 +173,8 @@
         while($row = $result->fetch_array(MYSQL_ASSOC))
         {
             echo '<div class="col-xs-6 col-lg-2 user-box" id="' . $row["idx"] . '"><div class="ibox float-e-margins"><div class="ibox-title">';
-            echo '<span class="badge badge-danger error-sign">' . $row["danger"] . '</span>';
-            echo '<span class="badge badge-warning warn-sign">' . $row["warn"] . '</span>';
+            echo '<div class="signs"><span class="badge badge-danger error-sign">' . $row["danger"] . '</span>';
+            echo '<span class="badge badge-warning warn-sign">' . $row["warn"] . '</span></div>';
             if($row["status"] == 0)
             {
                 echo '<span class="label label-success pull-right">정상</span>';
