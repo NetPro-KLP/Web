@@ -15,7 +15,7 @@
 
         $code*=10;
 
-        $sql = "select * from packets where 1";
+        $sql = "select * from packets where 1 ORDER BY idx DESC";
 
         $result = $db->mysqli->query($sql);
 
@@ -41,7 +41,7 @@
             echo '<td>' . $n . '</td>';
             echo '<td>' . long2ip($row["source_ip"]) . ":" . $row["source_port"] . '</td>';
             echo '<td>' . long2ip($row["destination_ip"]) . ":" . $row["destination_port"] . '</td>';
-            if($row["tcporudp"] == 0)
+            if($row["tcpudp"] == 0)
                 echo '<td>TCP</td>';
             else
                 echo '<td>UDP</td>';
