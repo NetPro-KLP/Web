@@ -15,8 +15,6 @@
             </div>
         </div>
     </div>
-    <div class="modal inmodal fade" id="Packet-Modal" tabindex="-1" role="dialog"  aria-hidden="true">
-    </div>
     <!-- Mainly scripts -->
     <script src="/assets/lib/js/jquery-2.1.4.min.js"></script>
     <script src="/assets/lib/js/bootstrap.min.js"></script>
@@ -30,5 +28,6 @@
     <script src="/assets/js/Control-Panel.js"></script>
     <script src="/assets/js/common.js"></script>
     <script src="/assets/lib/js/plugins/footable/footable.all.min.js"></script>
-
+    <div class="modal inmodal fade" id="Packet-Modal" tabindex="-1" role="dialog"  aria-hidden="true">
+    </div>
 </body>
