@@ -3,7 +3,6 @@
 
     $db = new db();
 
-
     for(;;)
     {
         $result = $db->mysqli->query("select remove_packet from system where 1");
