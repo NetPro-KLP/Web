@@ -1,39 +1,10 @@
 $.getScript("/assets/lib/js/socket.io.js", function(){
     var socket = io.connect('http://172.16.100.61:8888');
 
-    socket.emit('inoutbound week', {});
-    socket.on("inoutbound week res", function(data) {
-        console.log(data);
-    	if(data.code == 200)
-    	{
-        	var label = [];
-        	var inbound = [];
-        	var outbound = [];
-        	for(i=0;i<7;i++)
-        	{
-            	var temp = data.weekDate[0][i];
-            	label.push(temp);
-            	var temp = data.inbound[0][i];
-            	inbound.push(temp);
-            	var temp = data.outbound[0][i];
-            	outbound.push(temp);
-        	}
-        	new Chartist.Line('#ct-chart1', {
-                labels: label,
-                series: [
-                    inbound,
-                    outbound
-                ]
-            }, {
-                fullWidth: true,
-                chartPadding: {
-                    right: 30
-                }
-            });
-    	}
-    });
-
-
+    /*
+        위험도 그래프
+        바그래프
+    */
     socket.emit('barStatistics dangerWarn', {});
     socket.on("barStatistics dangerWarn res", function(data) {
         var bardatafix = [];
@@ -84,81 +55,45 @@ $.getScript("/assets/lib/js/socket.io.js", function(){
         $.plot($("#flot-bar-chart"), [barData], barOptions);
     });
 
-    socket.emit('tcpudp hour', {});
-    socket.on("tcpudp hour res", function(data) {
-        if(data.code == 200)
-        {
-            $(function() {
-                var TCP = [];
-                var UDP = [];
-
-                for(var i in data.tcpTraffic)
-                {
-                    var jstime = new Date(i * 1000);
-                    var temp = [];
-                    temp = [jstime,data.tcpTraffic[i][0].totalbytes];
-                    TCP.push(temp);
+    /*
+        In/OutBound 그래프
+        선그래프
+  프 */
+    socket.emit('inoutbound week', {});
+    socket.on("inoutbound week res", function(data) {
+    	if(data.code == 200)
+    	{
+        	var label = [];
+        	var inbound = [];
+        	var outbound = [];
+        	for(i=0;i<7;i++)
+        	{
+            	var temp = data.weekDate[0][i];
+            	label.push(temp);
+            	var temp = data.inbound[0][i];
+            	inbound.push(temp);
+            	var temp = data.outbound[0][i];
+            	outbound.push(temp);
+        	}
+        	new Chartist.Line('#ct-chart1', {
+                labels: label,
+                series: [
+                    inbound,
+                    outbound
+                ]
+            }, {
+                fullWidth: true,
+                chartPadding: {
+                    right: 30
                 }
-                for(var i in data.udpTraffic)
-                {
-                    var jstime = new Date(i * 1000);
-                    var temp = [];
-                    temp = [jstime,data.udpTraffic[i][0].totalbytes];
-                    UDP.push(temp);
-                }
-                function doPlot(position) {
-                    $.plot($("#flot-line-chart-multi"), [{
-                        data: TCP,
-                        label: "TCP"
-                    }, {
-                        data: UDP,
-                        label: "UDP"
-                    }], {
-                        xaxes: [{
-                            mode: 'time'
-                        }],
-                        yaxes: [{
-                            min: 0
-                        }, {
-                            // align if we are to the right
-                            alignTicksWithAxis: position == "right" ? 1 : null,
-                            position: position
-                        }],
-                        legend: {
-                            position: 'sw'
-                        },
-                         colors: ["#FF0000", "#0022FF"],
-                        grid: {
-                            color: "#999999",
-                            hoverable: true,
-                            clickable: true,
-                            tickColor: "#D4D4D4",
-                            borderWidth:0,
-                            hoverable: true
-                        },
-                        tooltip: true,
-                        tooltipOpts: {
-                            content: "%s패킷 데이터가 %x 에 %y/MB",
-                            xDateFormat: "%Y-%m-%d %h:%M:%S",
-
-                            onHover: function(flotItem, $tooltipEl) {
-                                // console.log(flotItem, $tooltipEl);
-                            }
-                        }
-
-                    });
-                }
-
-                doPlot("right");
-
-                $("button").click(function() {
-                    doPlot($(this).text());
-                });
             });
-        }
-        else
-            alert("커넥션이 종료 되었습니다. 페이지를 새로고침을 해주시기 바랍니다.");
+    	}
     });
+
+    /*
+        프로토컬 그래프
+        파이 그래프
+    */
 
     socket.emit('protocol statistics', {});
     socket.on("protocol statistics res", function(data) {
@@ -203,38 +138,40 @@ $.getScript("/assets/lib/js/socket.io.js", function(){
         });
     });
 
-    var container = $("#flot-line-chart-moving");
+    /*
+        실시간 트래픽
+        실시간 선 그래프
+    */
 
-    // Determine how many data points to keep based on the placeholder's initial size;
-    // this gives us a nice high-res plot while avoiding more than one point per pixel.
+    var container = $("#flot-line-chart-moving");
 
     var maximum = container.outerWidth() / 2 || 250;
 
-    //
     var data = [];
-
-    socket.emit('realtimeOn', {});
-    socket.on("realtimeOn res", function(td) {
-        if(td.code == 200)
-      	{
-          	for(var i =0;i<td.statistics.length;i++)
+    setInterval(function(){
+        socket.emit('realtimeOn', {});
+        socket.on("realtimeOn res", function(td) {
+            if(td.code == 200)
           	{
-                data.push(td.statistics[i][1]);
+              	for(var i =0;i<td.statistics.length;i++)
+              	{
+                    data.push(td.statistics[i][1]);
+              	}
           	}
-      	}
-    });
+        });
+    },500);
     function getTraffic() {
+        var n = 0;
         if (data.length) {
             data = data.slice(1);
         }
 
         while (data.length < maximum) {
             var previous = data.length ? data[data.length - 1] : 50;
-            var y = previous + Math.random() * 10 - 5;
+            var y = data[n];
             data.push(y < 0 ? 0 : y > 100 ? 100 : y);
+            n++;
         }
-
-        // zip the generated y values with the x values
 
         var res = [];
         for (var i = 0; i < data.length; ++i) {
@@ -297,11 +234,87 @@ $.getScript("/assets/lib/js/socket.io.js", function(){
         }
     });
 
-    // Update the random dataset at 25FPS for a smoothly-animating chart
-
     setInterval(function updateRandom() {
         series[0].data = getTraffic();
         plot.setData(series);
         plot.draw();
     }, 40);
+
+    /*
+        TCP/UDP 그래프
+        선그래프
+    */
+
+    socket.emit('tcpudp hour', {});
+    socket.on("tcpudp hour res", function(data) {
+        if(data.code == 200)
+        {
+            $(function() {
+                var TCP = [];
+                var UDP = [];
+
+                for(var i in data.tcpTraffic)
+                {
+                    var jstime = new Date(i*1000);
+                    var temp = [];
+                    temp = [jstime,data.tcpTraffic[i][0].totalbytes/1024];
+                    TCP.push(temp);
+                }
+                for(var i in data.udpTraffic)
+                {
+                    var jstime = new Date(i*1000);
+                    var temp = [];
+                    temp = [jstime,data.udpTraffic[i][0].totalbytes/1024];
+                    UDP.push(temp);
+                }
+                function doPlot(position) {
+                    $.plot($("#flot-line-chart-multi"), [{
+                        data: TCP,
+                        label: "TCP"
+                    }, {
+                        data: UDP,
+                        label: "UDP"
+                    }], {
+                        xaxes: [{
+                            mode: 'time',
+                            timeformat: "%Y-%m-%d %H:%M:%S"
+                        }],
+                        yaxes: [{
+                            min: 0
+                        }, {
+                            // align if we are to the right
+                            alignTicksWithAxis: position == "right" ? 1 : null,
+                            position: position
+                        }],
+                        legend: {
+                            position: 'sw'
+                        },
+                         colors: ["#FF0000", "#0022FF"],
+                        grid: {
+                            color: "#999999",
+                            hoverable: true,
+                            clickable: true,
+                            tickColor: "#D4D4D4",
+                            borderWidth:0,
+                            hoverable: true
+                        },
+                        tooltip: true,
+                        tooltipOpts: {
+                            content: "%s패킷 데이터가 %x 에 %y/MB",
+                            timeformat: "%Y-%m-%d %H:%M:%S",
+                        }
+                    });
+                }
+
+                doPlot("right");
+
+                $("button").click(function() {
+                    doPlot($(this).text());
+                });
+            });
+        }
+        else
+            alert("커넥션이 종료 되었습니다. 페이지를 새로고침을 해주시기 바랍니다.");
+    });
+
 });
