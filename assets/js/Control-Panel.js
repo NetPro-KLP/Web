@@ -6,7 +6,7 @@ function ajaxcall(action,idx){
         success: function(res){
             if(action == "show")
             {
-                $(".row").html(res);
+                $("#Packet-Modal").html(res);
                 $('.footable').footable();
                 $("#Packet-Modal").modal();
             }
@@ -30,42 +30,49 @@ $(document).on("click",".unblock",function(){
 $(document).on("click",".remove",function(){
     ajaxcall("remove",$(this).parent().parent().parent().parent().parent().attr("id"));
 });
-$(document).ready(function(){
-    if($(".warn-sign").length == 1)
-        $(".warn-sign").css("left",15);
-    else if($(".warn-sign").length == 2)
-        $(".warn-sign").css("left",20);
-    else if($(".warn-sign").length == 3)
-        $(".warn-sign").css("left",25);
-    else if($(".warn-sign").length == 4)
-        $(".warn-sign").css("left",30);
-});
 $.getScript("/assets/lib/js/socket.io.js", function(){
     var socket = io.connect('http://172.16.100.61:8888');
-    socket.emit('realtimeOn', {});
-    socket.on("realtimeOn res", function(data) {
-        if(data.code == 200)
-        {
-            for(var i in data)
+    setInterval(function(){
+        socket.emit('realtimeOn', {});
+        socket.on("realtimeOn res", function(data) {
+            $('.error-sign').each(function() {
+                if($(this).text().length == 1)
+                    $(this).css("left",20);
+                else if($(this).text().length == 2)
+                    $(this).css("left",25);
+                else if($(this).text().length == 3)
+                    $(this).css("left",35);
+                else if($(this).text().length == 4)
+                    $(this).css("left",40);
+            });
+            if(data.code == 200)
             {
-                var value = [];
-                for(var j in data[i])
-                    value.push(data[i][j].trafficPercentage);
-                $(".updating-chart[data-chart='" + i + "']").peity("line", { fill: '#0e9aef',stroke:'#1c84c6', width: 128 }).text(value.join(",")).change();
-                value = $(".updating-chart[data-chart='" + i + "']").text().split(",");
-                totalbytes = parseInt(data[i][data[i].length-1].totalbytes/1024);
-                $(".updating-chart[data-chart='" + i + "']").parent().find("small").text(totalbytes.toLocaleString() + "/MB");
-                $(".updating-chart[data-chart='" + i + "']").parent().parent().find("h7").text(data[i][data[i].length-1].endtime);
-                $(".updating-chart[data-chart='" + i + "']").parent().parent().find(".error-sign").text(data[i][data[i].length-1].totaldanger);
-                $(".updating-chart[data-chart='" + i + "']").parent().parent().find(".warn-sign").text(data[i][data[i].length-1].totalwarn);
+                for(var i in data)
+                {
+                    if(data.i == "statistics")
+                        continue;
+                    var value = [];
+                    for(var j in data[i])
+                    {
+                        if(data[i][j].totalbytes)
+                        {
+                            totalbytes = parseInt(data[i][data[i].length-1].totalbytes/1024);
+                            $(".updating-chart[data-chart='" + i + "']").parent().find("small").text(totalbytes.toLocaleString() + "/MB");
+                            $(".updating-chart[data-chart='" + i + "']").parent().parent().find("h7").text(data[i][data[i].length-1].endtime);
+                            $(".updating-chart[data-chart='" + i + "']").parent().parent().find(".error-sign").text(data[i][data[i].length-1].totaldanger);
+                            $(".updating-chart[data-chart='" + i + "']").parent().parent().find(".warn-sign").text(data[i][data[i].length-1].totalwarn);
+                        }
+                        else
+                            value.push(data[i][j].trafficPercentage);
+                    }
+                    $(".updating-chart[data-chart='" + i + "']").peity("line", { fill: '#0e9aef',stroke:'#1c84c6', width: 128 }).text(value.join(",")).change();
+                    value = $(".updating-chart[data-chart='" + i + "']").text().split(",");
+                }
             }
-        }
-        else
-            alert("커넥션이 종료 되었습니다. 페이지를 새로고침을 해주시기 바랍니다.");
-    });
-    socket.on("realtimeClose res", function(data) {
-    	console.log(JSON.stringify(data));
-    });
+            else
+                alert("커넥션이 종료 되었습니다. 페이지를 새로고침을 해주시기 바랍니다.");
+        });
+    },500);
 });
 function getData(page){
     $.ajax({
