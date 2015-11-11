@@ -14,7 +14,7 @@
     {
         $code*=10;
 
-        $sql = "SELECT packets.source_ip,packets.source_port,packets.destination_ip,packets.destination_port,packets.tcpudp, packet_log.name,packet_log.hazard,packet_log.payload,packet_log.createdAt FROM `packet_log` INNER JOIN packets ON packet_log.packet_idx = packets.idx";
+        $sql = "SELECT source_ip,source_port,destination_ip,destination_port,tcpudp, name, hazard, payload, createdAt FROM `packet_log`";
 
         $result = $db->mysqli->query($sql);
 
