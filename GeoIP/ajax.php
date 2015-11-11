@@ -12,7 +12,7 @@
 
 	if($operation == "trafficall")
 	{
-        $sql = "SELECT packets.totalbytes,GeoIP.country_code FROM `packets`,`GeoIP` WHERE GeoIP.from_ip_int <= packets.destination_ip and GeoIP.to_ip_int >=     packets.destination_ip";
+        $sql = "SELECT * FROM `GeoIP_Traffic` WHERE 1";
         $result = $db->mysqli->query($sql);
 
         while($row = $result->fetch_array(MYSQLI_ASSOC))
@@ -52,7 +52,7 @@
   {
         $code*=10;
 
-        $sql = "SELECT SUM(packets.totalbytes) as totalbytes,GeoIP.country,GeoIP.country_code FROM `packets`,`GeoIP` WHERE GeoIP.from_ip_int <= packets.destination_ip and GeoIP.to_ip_int >=packets.destination_ip GROUP BY GeoIP.country_code order by totalbytes desc";
+        $sql = "SELECT * FROM `GeoIP_Traffic` WHERE 1";
 
         $result = $db->mysqli->query($sql);
 
