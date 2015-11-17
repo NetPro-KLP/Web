@@ -6,7 +6,8 @@ NetPro-KLP Web
 ```
 * NGINX
 * PHP
-* PhpMyAdmin
+* Mysql
+* Socket.IO
 ```
 
 ##Introduction##

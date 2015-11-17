@@ -1,7 +1,7 @@
 .DS_STORE
 phpmyadmin
 
-db.php
+./db.php
 assets/lib
 assets/img
 /data
